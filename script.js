@@ -166,6 +166,7 @@ function movePiece(playerIndex) {
         boxes[p.y][boxes[0].length - 1].text = p.symbol;
     }
 
+    setTimeout(()=>{
     if (checkWin(p.symbol)) {
         alert(p.symbol + " a câștigat!");
         initBoxes(5, 5);
@@ -175,7 +176,8 @@ function movePiece(playerIndex) {
     } else {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
     }
-}
+}, 100);
+
 function checkWin(player) {
  
     for (let row = 0; row < boxes.length; row++) {
@@ -233,4 +235,5 @@ function checkWin(player) {
     }
 
     return false;
+}
 }
