@@ -3,6 +3,8 @@ let borderHeight = 0;
 let boxes = []; 
 let playerX = 0;
 let playerY = 0;
+let gridOffsetX = 0;
+let gridOffsetY = 0;
 
 let currentPlayer = "X";
 let selectMode = false; 
@@ -50,8 +52,13 @@ function drawColorfulBoxes() {
 }
 
 function initBoxes(colNumber, rowNumber) {
-    let x = 45;
-    let y = 45;
+     let boxSize = 80;
+    let spacing = 10;
+    let totalWidth = colNumber * (boxSize + spacing) - spacing;
+    let totalHeight = rowNumber * (boxSize + spacing) - spacing;
+  gridOffsetX = (windowWidth - totalWidth) / 2;
+    gridOffsetY = (windowHeight - totalHeight) / 2;
+
     boxes = [];
 
     for (let j = 0; j < rowNumber; j++) {
@@ -59,18 +66,17 @@ function initBoxes(colNumber, rowNumber) {
         for (let i = 0; i < colNumber; i++) {
             let textValue = options[Math.floor(Math.random() * options.length)];
             let box = {
-                x: x,
-                y: y,
-                l: 80,  
+                x: gridOffsetX + i * (boxSize + spacing),
+                y: gridOffsetY + j * (boxSize + spacing),
+                l: boxSize,
                 text: textValue,  
                 hide: false 
             };
             line.push(box);
-            x += 90; 
+           
         }
         boxes.push(line);  
-        y += 90;  
-        x = 45;   
+         
     }
 }
 
