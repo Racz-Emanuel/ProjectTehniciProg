@@ -18,7 +18,7 @@ function setup() {
 }
 
 function draw() {
-    background("gray");
+    background("red");
     drawColorfulBoxes();
     
     let inputText = myInput.value(); 
