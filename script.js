@@ -16,7 +16,7 @@ let currentPlayerIndex = 0;
 let currentPlayer = "X";
 let selectMode = false; 
 
-let options = ["X", "O", "", ""]; 
+let options = [""]; 
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
