@@ -6,6 +6,13 @@ let playerY = 0;
 let gridOffsetX = 0;
 let gridOffsetY = 0;
 
+let players =[
+    {x:0, y:0, symbol: "X", color: "yellow"},
+    {x:4, y:4, symbol:"O", color:"blue"}
+];
+let currentPlayerIndex = 0;
+
+
 let currentPlayer = "X";
 let selectMode = false; 
 
@@ -20,7 +27,7 @@ function setup() {
 }
 
 function draw() {
-    background("red");
+    background("gray");
     drawColorfulBoxes();
     
     let inputText = myInput.value(); 
@@ -34,10 +41,18 @@ function drawColorfulBoxes() {
     for (let row = 0; row < boxes.length; row++) {
         for (let col = 0; col < boxes[row].length; col++) {
             let box = boxes[row][col];
+            
+            let  isPlayerHere =false;
 
-            if (row === playerY && col === playerX) {
-                fill("yellow"); 
-            } else {
+            for(let i = 0; i< player.lenght; i++){
+            if (player[i].x == col&& player[i].y ==row) {
+                fill(players[i].color);
+                isPlayerHere =true;
+                break;
+            }
+        }
+
+            if(!isPlayerHere){
                 fill(181, 110, 60);
             }
 
