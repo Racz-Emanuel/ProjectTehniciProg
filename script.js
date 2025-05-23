@@ -96,35 +96,41 @@ function initBoxes(colNumber, rowNumber) {
 }
 
 function keyPressed() {
-    let nextX = playerX;
-    let nextY = playerY;
 
-    if (key === 'w') nextY--;
-    if (key === 's') nextY++;
-    if (key === 'a') nextX--;
-    if (key === 'd') nextX++; 
+    let p = players[currentPlayerIndex];
+
+    let nextX = p.x;
+    let nextY = p.y;
+
+    if (currentPlayerIndex == 0) {
+        if (key === 'w') nextY--;
+        if (key === 's') nextY++;
+        if (key === 'a') nextX--;
+        if (key === 'd') nextX++;
+
+    } else if (currentPlayerIndex == 1) {
+        if (key === 'i') nextY--;
+        if (key === 'k') nextY++;
+        if (key === 'j') nextX--;
+        if (key === 'l') nextX++;
+    }
 
     if (
         nextX >= 0 && nextX < boxes[0].length &&
         nextY >= 0 && nextY < boxes.length &&
         (
-            nextY === 0 || 
-            nextY === boxes.length - 1 || 
-            nextX === 0 || 
+            nextY === 0 ||
+            nextY === boxes.length - 1 ||
+            nextX === 0 ||
             nextX === boxes[0].length - 1
         )
     ) {
-        playerX = nextX;
-        playerY = nextY;
+        p.x = nextX;
+        p.y = nextY;
     }
 
     if (keyCode === ENTER) {
-        selectMode = true;
-    } else {
-        if (key === 'w') movePiece("up");
-        if (key === 's') movePiece("down");
-        if (key === 'a') movePiece("left");
-        if (key === 'd') movePiece("right");
+        movePiece(currentPlaerIndex);
     }
 }
 
