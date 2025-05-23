@@ -44,8 +44,8 @@ function drawColorfulBoxes() {
             
             let  isPlayerHere =false;
 
-            for(let i = 0; i< player.lenght; i++){
-            if (player[i].x == col&& player[i].y ==row) {
+          for(let i = 0; i < players.length; i++){
+        if (players[i].x === col && players[i].y === row) {
                 fill(players[i].color);
                 isPlayerHere =true;
                 break;
@@ -130,49 +130,52 @@ function keyPressed() {
     }
 
     if (keyCode === ENTER) {
-        movePiece(currentPlaerIndex);
+        movePiece(currentPlayerIndex);
     }
 }
 
-function movePiece(direction) {
-    if (direction === "up" && playerY === boxes.length-1) {
-        for (let y = playerY; y > 0; y--) {
-            boxes[y][playerX].text = boxes[y-1][playerX].text;
+function movePiece(playerIndex) {
+    let p = players[playerIndex];
+    let direction = "";
+
+    if (p.y === boxes.length - 1) direction = "up";
+    else if (p.y === 0) direction = "down";
+    else if (p.x === boxes[0].length - 1) direction = "left";
+    else if (p.x === 0) direction = "right";
+    else return;
+
+    if (direction === "up") {
+        for (let y = p.y; y > 0; y--) {
+            boxes[y][p.x].text = boxes[y - 1][p.x].text;
         }
-        boxes[0][playerX].text = currentPlayer;
-    } else if (direction === "down" && playerY === 0) {
-        for (let y = playerY; y < boxes.length-1; y++) {
-            boxes[y][playerX].text = boxes[y+1][playerX].text;
+        boxes[0][p.x].text = p.symbol;
+    } else if (direction === "down") {
+        for (let y = p.y; y < boxes.length - 1; y++) {
+            boxes[y][p.x].text = boxes[y + 1][p.x].text;
         }
-        boxes[boxes.length-1][playerX].text = currentPlayer;
-    } else if (direction === "left" && playerX === boxes[0].length-1) {
-        for (let x = playerX; x > 0; x--) {
-            boxes[playerY][x].text = boxes[playerY][x-1].text;
+        boxes[boxes.length - 1][p.x].text = p.symbol;
+    } else if (direction === "left") {
+        for (let x = p.x; x > 0; x--) {
+            boxes[p.y][x].text = boxes[p.y][x - 1].text;
         }
-        boxes[playerY][0].text = currentPlayer;
-    } else if (direction === "right" && playerX === 0) {
-        for (let x = playerX; x < boxes[0].length-1; x++) {
-            boxes[playerY][x].text = boxes[playerY][x+1].text;
+        boxes[p.y][0].text = p.symbol;
+    } else if (direction === "right") {
+        for (let x = p.x; x < boxes[0].length - 1; x++) {
+            boxes[p.y][x].text = boxes[p.y][x + 1].text;
         }
-        boxes[playerY][boxes[0].length-1].text = currentPlayer;
-    } else {
-        selectMode = false;
-        return;
+        boxes[p.y][boxes[0].length - 1].text = p.symbol;
     }
 
-    selectMode = false; 
-
-    if (checkWin(currentPlayer)) {
-        alert(currentPlayer + " a câștigat!");
+    if (checkWin(p.symbol)) {
+        alert(p.symbol + " a câștigat!");
         initBoxes(5, 5);
-        currentPlayer = "X";
-        playerX = 0;
-        playerY = 0;
+        players[0].x = 0; players[0].y = 0;
+        players[1].x = 4; players[1].y = 4;
+        currentPlayerIndex = 0;
     } else {
-        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
     }
 }
-
 function checkWin(player) {
  
     for (let row = 0; row < boxes.length; row++) {
