@@ -22,18 +22,23 @@ function setup() {
     borderWidth = windowWidth;
     borderHeight = windowHeight;
     initBoxes(5, 5); 
-    myInput = createInput(); 
+    myInput = createInput();
+    myInput.position(20, 20);
 }
 
 function draw() {
-    background("gray");
+    background("#2e2e2e");
     drawColorfulBoxes();
-    
-    let inputText = myInput.value(); 
-    textSize(32);
-    textAlign(CENTER, CENTER);
-    fill(0);
-    text(inputText, 500, 500);  
+
+    fill(255);
+    textSize(20);
+    textAlign(LEFT, TOP);
+    text("Mesaj: " + myInput.value(), 20, 60);
+
+    fill(255);
+    textSize(24);
+    textAlign(CENTER, TOP);
+    text("Rândul jucătorului: " + players[currentPlayerIndex].symbol, width / 2, 10);
 }
 
 function drawColorfulBoxes() {
