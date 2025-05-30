@@ -7,8 +7,8 @@ let gridOffsetX = 0;
 let gridOffsetY = 0;
 
 let players = [
-    { x: 0, y: 0, symbol: "X", color: "#FFD700" }, // galben
-    { x: 4, y: 4, symbol: "O", color: "#1E90FF" }  // albastru
+   { x: 0, y: 0, symbol: "X", color: "#FFD700", score: 0 }, // galben
+    { x: 4, y: 4, symbol: "O", color: "#1E90FF", score: 0 }  // albastru
 ];
 
 let currentPlayerIndex = 0;
@@ -39,7 +39,12 @@ function draw() {
     textSize(24);
     textAlign(CENTER, TOP);
     text("Rândul jucătorului: " + players[currentPlayerIndex].symbol, width / 2, 10);
+
+    // Afișează scorul fiecărui jucător
+    textSize(20);
+    text("Scor X: " + players[0].score + " | Scor O: " + players[1].score, width / 2, 40);
 }
+
 
 function drawColorfulBoxes() {
     for (let row = 0; row < boxes.length; row++) {
@@ -180,7 +185,8 @@ function movePiece(playerIndex) {
 
     setTimeout(()=>{
     if (checkWin(p.symbol)) {
-        alert(p.symbol + " a câștigat!");
+    players[playerIndex].score++;  // ➕ crește scorul
+    alert(p.symbol + " a câștigat!");
         initBoxes(5, 5);
         players[0].x = 0; players[0].y = 0;
         players[1].x = 4; players[1].y = 4;
@@ -248,4 +254,5 @@ function checkWin(player) {
 
     return false;
 }
+
 }
