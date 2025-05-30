@@ -33,7 +33,7 @@ function draw() {
     fill(255);
     textSize(20);
     textAlign(LEFT, TOP);
-    text("Mesaj: " + myInput.value(), 20, 60);
+    text( myInput.value(), 20, 60);
 
     fill(255);
     textSize(24);
@@ -81,11 +81,11 @@ function drawColorfulBoxes() {
 }
 
 function initBoxes(colNumber, rowNumber) {
-     let boxSize = 80;
-    let spacing = 10;
+    let boxSize = 80;
+    let spacing = 12;
     let totalWidth = colNumber * (boxSize + spacing) - spacing;
     let totalHeight = rowNumber * (boxSize + spacing) - spacing;
-  gridOffsetX = (windowWidth - totalWidth) / 2;
+    gridOffsetX = (windowWidth - totalWidth) / 2;
     gridOffsetY = (windowHeight - totalHeight) / 2;
 
     boxes = [];
@@ -102,10 +102,8 @@ function initBoxes(colNumber, rowNumber) {
                 hide: false 
             };
             line.push(box);
-           
         }
         boxes.push(line);  
-         
     }
 }
 
