@@ -6,13 +6,12 @@ let playerY = 0;
 let gridOffsetX = 0;
 let gridOffsetY = 0;
 
-let players =[
-    {x:0, y:0, symbol: "X", color: "yellow"},
-    {x:4, y:4, symbol:"O", color:"blue"}
+let players = [
+    { x: 0, y: 0, symbol: "X", color: "#FFD700" }, // galben
+    { x: 4, y: 4, symbol: "O", color: "#1E90FF" }  // albastru
 ];
+
 let currentPlayerIndex = 0;
-
-
 let currentPlayer = "X";
 let selectMode = false; 
 
