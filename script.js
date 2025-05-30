@@ -45,27 +45,37 @@ function drawColorfulBoxes() {
     for (let row = 0; row < boxes.length; row++) {
         for (let col = 0; col < boxes[row].length; col++) {
             let box = boxes[row][col];
-            
-            let  isPlayerHere =false;
+            let isPlayerHere = false;
 
-          for(let i = 0; i < players.length; i++){
-        if (players[i].x === col && players[i].y === row) {
-                fill(players[i].color);
-                isPlayerHere =true;
-                break;
-            }
-        }
-
-            if(!isPlayerHere){
-                fill(181, 110, 60);
+            for (let i = 0; i < players.length; i++) {
+                if (players[i].x === col && players[i].y === row) {
+                    fill(players[i].color);
+                    isPlayerHere = true;
+                    break;
+                }
             }
 
-            rect(box.x, box.y, box.l, box.l);
-            
-            fill(0);
-            textSize(50);
+            if (!isPlayerHere) {
+                // checkerboard pattern
+                if ((row + col) % 2 === 0) {
+                    fill("#d8a57b");
+                } else {
+                    fill("#c18b62");
+                }
+            }
+
+            stroke(80);
+            strokeWeight(2);
+            rect(box.x, box.y, box.l, box.l, 12); // colțuri rotunjite
+
+            // Shadow effect for text
+            textSize(36);
             textAlign(CENTER, CENTER);
-            text(box.text, box.x + box.l / 2, box.y + box.l / 2);
+            noStroke();
+            fill(0, 100);
+            text(box.text, box.x + box.l / 2 + 2, box.y + box.l / 2 + 2); // shadow
+            fill(255);
+            text(box.text, box.x + box.l / 2, box.y + box.l / 2); // text alb
         }
     }
 }
