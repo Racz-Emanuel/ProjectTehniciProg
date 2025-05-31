@@ -5,6 +5,7 @@ let playerX = 0;
 let playerY = 0;
 let gridOffsetX = 0;
 let gridOffsetY = 0;
+let woodenimage;
 
 let players = [
    { x: 0, y: 0, symbol: "X", color: "#FFD700", score: 0 }, // galben
@@ -17,6 +18,11 @@ let selectMode = false;
 
 let options = [""]; 
 
+function preload() {
+    woodenimage = loadImage('woodenimage.jpeg'); // asigură-te că fișierul există în folderul proiectului
+}
+
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
     borderWidth = windowWidth;
@@ -27,7 +33,7 @@ function setup() {
 }
 
 function draw() {
-    background("#2e2e2e");
+    image(woodenimage, 0, 0, width, height);
     drawColorfulBoxes();
 
     fill(255);
