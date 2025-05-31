@@ -8,8 +8,8 @@ let gridOffsetY = 0;
 let woodenimage;
 
 let players = [
-   { x: 0, y: 0, symbol: "X", color: "#FFD700", score: 0 }, // galben
-    { x: 4, y: 4, symbol: "O", color: "#1E90FF", score: 0 }  // albastru
+   { x: 0, y: 0, symbol: "X", color: "#000000", score: 0 }, // galben
+    { x: 4, y: 4, symbol: "O", color: "#000000", score: 0 }  // albastru
 ];
 
 let currentPlayerIndex = 0;
@@ -56,37 +56,40 @@ function drawColorfulBoxes() {
     for (let row = 0; row < boxes.length; row++) {
         for (let col = 0; col < boxes[row].length; col++) {
             let box = boxes[row][col];
-            let isPlayerHere = false;
 
-            for (let i = 0; i < players.length; i++) {
-                if (players[i].x === col && players[i].y === row) {
-                    fill(players[i].color);
-                    isPlayerHere = true;
-                    break;
-                }
-            }
+            // Verificăm dacă pe această poziție e vreun jucător
+            let playerHere = players.find(p => p.x === col && p.y === row);
 
-            if (!isPlayerHere) {
+            // Colorăm caseta
+            if (playerHere) {
+                fill(playerHere.color);
+            } else {
                 // checkerboard pattern
                 if ((row + col) % 2 === 0) {
-                    fill("#d8a57b");
+                    fill("#ffffff");
                 } else {
-                    fill("#c18b62");
+                    fill("#b3b3b3");
                 }
             }
 
             stroke(80);
             strokeWeight(2);
-            rect(box.x, box.y, box.l, box.l, 12); // colțuri rotunjite
+            rect(box.x, box.y, box.l, box.l, 12);
 
-            // Shadow effect for text
+            // Textul din casetă - dacă e jucător aici, afișăm simbolul lui, altfel textul din box
             textSize(36);
             textAlign(CENTER, CENTER);
             noStroke();
-            fill(0, 100);
-            text(box.text, box.x + box.l / 2 + 2, box.y + box.l / 2 + 2); // shadow
-            fill(255);
-            text(box.text, box.x + box.l / 2, box.y + box.l / 2); // text alb
+
+            if (playerHere) {
+                fill(255); // culoare text simbol jucător
+                text(playerHere.symbol, box.x + box.l / 2, box.y + box.l / 2);
+            } else {
+                fill(0, 100);
+                text(box.text, box.x + box.l / 2 + 2, box.y + box.l / 2 + 2); // shadow
+                fill(0);
+                text(box.text, box.x + box.l / 2, box.y + box.l / 2);
+            }
         }
     }
 }
