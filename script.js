@@ -8,8 +8,8 @@ let gridOffsetY = 0;
 let woodenimage;
 
 let players = [
-   { x: 0, y: 0, symbol: "X", color: "#000000", score: 0 }, // galben
-    { x: 4, y: 4, symbol: "O", color: "#000000", score: 0 }  // albastru
+   { x: 0, y: 0, symbol: "X", color: "#000000", score: 0 }, 
+    { x: 4, y: 4, symbol: "O", color: "#000000", score: 0 }  
 ];
 
 let currentPlayerIndex = 0;
@@ -19,7 +19,7 @@ let selectMode = false;
 let options = [""]; 
 
 function preload() {
-    woodenimage = loadImage('woodenimage.jpeg'); // asigură-te că fișierul există în folderul proiectului
+    woodenimage = loadImage('woodenimage.jpeg'); 
 }
 
 
@@ -46,7 +46,7 @@ function draw() {
     textAlign(CENTER, TOP);
     text("Rândul jucătorului: " + players[currentPlayerIndex].symbol, width / 2, 10);
 
-    // Afișează scorul fiecărui jucător
+   
     textSize(20);
     text("Scor X: " + players[0].score + " | Scor O: " + players[1].score, width / 2, 40);
 }
@@ -57,14 +57,14 @@ function drawColorfulBoxes() {
         for (let col = 0; col < boxes[row].length; col++) {
             let box = boxes[row][col];
 
-            // Verificăm dacă pe această poziție e vreun jucător
+            
             let playerHere = players.find(p => p.x === col && p.y === row);
 
-            // Colorăm caseta
+            
             if (playerHere) {
                 fill(playerHere.color);
             } else {
-                // checkerboard pattern
+                
                 if ((row + col) % 2 === 0) {
                     fill("#ffffff");
                 } else {
@@ -76,17 +76,17 @@ function drawColorfulBoxes() {
             strokeWeight(2);
             rect(box.x, box.y, box.l, box.l, 12);
 
-            // Textul din casetă - dacă e jucător aici, afișăm simbolul lui, altfel textul din box
+            
             textSize(36);
             textAlign(CENTER, CENTER);
             noStroke();
 
             if (playerHere) {
-                fill(255); // culoare text simbol jucător
+                fill(255); 
                 text(playerHere.symbol, box.x + box.l / 2, box.y + box.l / 2);
             } else {
                 fill(0, 100);
-                text(box.text, box.x + box.l / 2 + 2, box.y + box.l / 2 + 2); // shadow
+                text(box.text, box.x + box.l / 2 + 2, box.y + box.l / 2 + 2); 
                 fill(0);
                 text(box.text, box.x + box.l / 2, box.y + box.l / 2);
             }
@@ -194,7 +194,7 @@ function movePiece(playerIndex) {
 
     setTimeout(()=>{
     if (checkWin(p.symbol)) {
-    players[playerIndex].score++;  // ➕ crește scorul
+    players[playerIndex].score++;  
     alert(p.symbol + " a câștigat!");
         initBoxes(5, 5);
         players[0].x = 0; players[0].y = 0;
